@@ -4,17 +4,17 @@
 #define ESC "\033"
 
 //Format text
-#define RESET 		0
-#define BRIGHT 		1
-#define DIM		2
-#define UNDERSCORE	3
-#define BLINK		4
-#define REVERSE		5
-#define HIDDEN		6
+#define RESET 		0 // Обычный
+#define BRIGHT 		1 //Жирный
+#define DIM		2  //Темный
+#define UNDERSCORE	3 // Наклон
+#define BLINK		4 //Подчеркнуто
+#define REVERSE		5 // Моргать
+#define HIDDEN		6  // Моргать
 
 //Foreground Colours (text)
 
-#define F_BLACK 	30
+#define F_BLACK 	232
 #define F_RED		31
 #define F_GREEN		32
 #define F_YELLOW	33
