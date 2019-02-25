@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "term.h"
-#include "cpu_load.c"
+
 /*ANSI/VT100 Terminal using example */
 
 
@@ -69,7 +69,20 @@ puts(
 }
 
 
+void cpuload(){
+//set_display_atrib(B_BLUE);
+//char cpu[] = "teeeest";
+//system("ps axc --format pid,%cpu,%mem,command --sort=-%cpu --headers | head -n 5");
+//printf("%S",cpu[3]);
+}
 
+void memload(){
+set_display_atrib(BRIGHT);
+set_display_atrib(B_MAGENTA);
+gotoxy(20,20);
+printf("%s",system("ps axc --format pid,%cpu,%mem,command --sort=-%mem --headers | head -n 5"));
+resetcolor();
+}
 
 void print_alarm (int alarm_error) {
 	gotoxy(1,2);
@@ -78,8 +91,8 @@ void print_alarm (int alarm_error) {
 		set_display_atrib(B_RED);
 		printf("       !HIGHLOAD!      ");
 	} else {
-		set_display_atrib(RESET);
-		set_display_atrib(B_BLACK);
+		set_display_atrib(BRIGHT);
+		set_display_atrib(B_BLUE);
 		printf("           OK          ");
 	}
 resetcolor();
@@ -89,8 +102,6 @@ resetcolor();
 
 void print_time_date (struct tm* tm_info) {
 	char buffer[12];
-	set_display_atrib(BRIGHT);
-	set_display_atrib(B_BLACK);
 	strftime(buffer, 12, "%d.%m.%y", tm_info);
 	gotoxy(22,7)
 	puts(buffer);
@@ -119,13 +130,13 @@ alarm_counter += 1;
 		time(&timer);
 		tm_info = localtime(&timer);
 //********************************//
-		print_time_date(tm_info);
-		cpuload ();
-
+		//print_time_date(tm_info);
+		//cpuload ();
+		memload();
 //********************************//
 		gotoxy(1,18);
 		fflush(stdout);
-		sleep(2);
+		sleep(1);
 	}
 }
 
